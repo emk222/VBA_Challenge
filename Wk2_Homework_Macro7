@@ -1,0 +1,12 @@
+Sub Macro7_RunAll()
+
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+
+'Run the Macros in sequence
+Call Macro1_Volume_Total
+Call Macro2_Open_Price
+Call Macro3_Close_Price
+Call Macro4_Calc
+Call Macro5_Format
+Call Macro6_Challenge
+End Sub

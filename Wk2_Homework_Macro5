@@ -1,0 +1,35 @@
+Sub Macro5_Format()
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+
+
+' Format the Columns and create header row
+
+' Label Header Row
+Cells(1, 11).Value = "Ticker"
+Cells(1, 12).Value = "Yearly Change"
+Cells(1, 13).Value = "Percent Change"
+Cells(1, 14).Value = "Total Stock Volume"
+
+' Determine the Last Row of Column K
+   Dim lastrowK As Long
+   lastrowK = Cells(Rows.Count, "K").End(xlUp).Row
+
+' Format % Change Column as percent
+Range("m2:m" & lastrowK).NumberFormat = "0.00%"
+
+' Format Yearly Change Column as green/red
+For i = 2 To lastrowK
+
+If Cells(i, 12) > 0 Then
+   Cells(i, 12).Interior.ColorIndex = 4
+ElseIf Cells(i, 12) < 0 Then
+   Cells(i, 12).Interior.ColorIndex = 3
+   End If
+   
+Next i
+
+' Reformat Columns O and P to invisible
+  Range("O:O").Font.Color = vbWhite
+  Range("P:P").Font.Color = vbWhite
+  
+End Sub

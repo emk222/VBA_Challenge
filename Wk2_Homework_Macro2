@@ -1,0 +1,65 @@
+Sub Macro2_Open_Price()
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+  
+  'Identify the Open Price per ticker 
+  ' Set an initial variable for holding the ticker name
+  Dim Ticker_Name As String
+
+  ' Set an initial variable for holding the open price per ticker
+  Dim Open_Price As Double
+  Open_Price = 0
+
+  ' Keep track of the location for each ticker in the summary table
+  Dim Summary_Table_Row As Integer
+  Summary_Table_Row = 3
+  
+  ' Determine the Last Row
+   Dim lastrow As Long
+   lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+
+  ' Loop through all
+  For i = 2 To lastrow
+
+    ' Check if we are still within the same ticker, if it is not...
+    If Cells(i, 1).Value <> Cells(i + 1, 1).Value Then
+
+      ' Set the Ticker
+      Ticker_Name = Cells(i + 1, 1).Value
+
+      ' State the Open Price
+      Open_Price = Cells(i + 1, 3).Value
+
+      ' Print the Ticker name in the Summary Table
+      Range("K" & Summary_Table_Row).Value = Ticker_Name
+
+      ' Print the Open Price to the Summary Table
+      Range("o" & Summary_Table_Row).Value = Open_Price
+
+      ' Add one to the summary table row
+      Summary_Table_Row = Summary_Table_Row + 1
+
+      
+
+    ' If the cell immediately following a row is the same ticker..
+    Else
+
+      ' State the Open Price
+      Open_Price = Cells(i + 1, 3).Value
+
+    End If
+
+  
+  Next i
+
+ 'Inelegant solve for the first ticker
+
+   Range("o2").Value = Range("c2").Value
+   
+   
+   
+   
+
+End Sub
+
+
+

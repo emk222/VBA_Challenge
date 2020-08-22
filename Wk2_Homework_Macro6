@@ -1,0 +1,55 @@
+Sub Macro6_Challenge()
+ 
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+
+'Complete the challenge box 
+' Determine the Last Row of Column K
+   Dim lastrowK As Long
+   lastrowK = Cells(Rows.Count, "K").End(xlUp).Row
+   
+   Dim Greatest_Increase As Double
+   Dim Greatest_Decrease As Double
+   Dim Greatest_Volume As Double
+   Dim testrange As Range
+   Dim testrange2 As Range
+   
+  Set testrange = Range("m2:m" & lastrowK)
+   Greatest_Increase = Application.WorksheetFunction.Max(testrange)
+   Cells(2, 20).Value = Greatest_Increase
+   
+   Set testrange = Range("m2:m" & lastrowK)
+   Greatest_Decrease = Application.WorksheetFunction.Min(testrange)
+   Cells(3, 20).Value = Greatest_Decrease
+   
+   Set testrange2 = Range("n2:n" & lastrowK)
+   Greatest_Volume = Application.WorksheetFunction.Max(testrange2)
+   Cells(4, 20).Value = Greatest_Volume
+   
+' Format Challenge Cells
+    Cells(2, 20).NumberFormat = "0.00%"
+  Cells(3, 20).NumberFormat = "0.00%"
+ 
+ 'Assign Challenge Cells
+     
+    Cells(2, 18).Value = "Greatest % Increase"
+  Cells(3, 18).Value = "Greatest % Decrease"
+  Cells(4, 18).Value = "Greatest Total Volume"
+  
+   ' Find Ticker Match
+Dim i As Long
+For i = 2 To lastrowK
+
+If Cells(i, 13) = Greatest_Increase Then
+   Cells(2, 19) = Cells(i, 11)
+   End If
+ If Cells(i, 13) = Greatest_Decrease Then
+   Cells(3, 19) = Cells(i, 11)
+   End If
+ If Cells(i, 14) = Greatest_Volume Then
+   Cells(4, 19) = Cells(i, 11)
+   End If
+Next i
+     
+      
+  
+End Sub

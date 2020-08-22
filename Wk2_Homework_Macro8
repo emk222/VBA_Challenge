@@ -1,0 +1,14 @@
+Sub Macro8_All_Worksheets()
+   
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+
+
+    Dim ws As Worksheet
+    Application.ScreenUpdating = False
+    For Each ws In Worksheets
+        ws.Select
+        Call Macro7_RunAll
+    Next
+    Application.ScreenUpdating = True
+End Sub
+

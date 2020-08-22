@@ -1,0 +1,58 @@
+Sub Macro1_Volume_Total()
+  ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity.  
+  
+
+  'Identify each independent Ticker and Caluculate the Volume Total Column
+
+  ' Set a variable for holding the ticker name
+  Dim Ticker_Name As String
+
+  ' Set a variable for holding the volume total per ticker
+  Dim Volume_Total As Double
+  Volume_Total = 0
+
+  ' Keep track of the location for each ticker in the summary table
+  Dim Summary_Table_Row As Integer
+  Summary_Table_Row = 2
+  
+   ' Determine the Last Row
+   Dim lastrow As Long
+   lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+
+  ' Loop through all
+  For i = 2 To lastrow
+
+    ' Check if we are still within the same ticker, if it is not...
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+
+      ' Set the Ticker name
+      Ticker_Name = Cells(i, 1).Value
+
+      ' Add to the Volume Total
+      Volume_Total = Volume_Total + Cells(i, 7).Value
+
+      ' Print the Ticker Name in the Summary Table
+      Range("K" & Summary_Table_Row).Value = Ticker_Name
+
+      ' Print the Volume Total to the Summary Table
+      Range("n" & Summary_Table_Row).Value = Volume_Total
+
+      ' Add one to the summary table row
+      Summary_Table_Row = Summary_Table_Row + 1
+      
+      ' Reset the Volume Total
+      Volume_Total = 0
+
+    ' If the cell immediately following a row is the same ticker...
+    Else
+
+      ' Add to the Volume Total
+      Volume_Total = Volume_Total + Cells(i, 7).Value
+
+    End If
+
+  Next i
+
+End Sub
+
+

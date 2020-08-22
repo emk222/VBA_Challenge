@@ -1,0 +1,46 @@
+Sub Macro4_Calc()
+   
+ ' I approached the homework as a series of Steps.  Macros 1 through 3 identify the data for each ticker; Macro 4 makes calculations on that data; Macro 5 formats; Macro 6 completes the challenge exercise;  Macro 7 nests Macros 1-6 to be performed on one worksheet; Macro  8 executes Macro 7 across all worksheets.  With all macros in place running Macro 8 executes all the activity. 
+
+   'Calculate Yearly Change and % Change
+   'Create Variables
+   Dim Start_Value As Double
+   Dim End_Value As Double
+   Dim Yearly_Change As Double
+   Dim Percent_Change As Double
+   
+' Determine the Last Row
+   Dim lastrowK As Long
+   lastrowK = Cells(Rows.Count, "K").End(xlUp).Row
+
+   'For Loop
+   For i = 2 To lastrowK
+   
+   
+   'Retrieve and store data for variables
+   Start_Value = Cells(i, 15).Value
+   End_Value = Cells(i, 16).Value
+   
+   'Dividing by Zero
+   If Start_Value = 0 Then
+   Percent_Change = 0
+   Yearly_Change = 0
+    Else
+   
+   
+   
+   'Calculate
+   Yearly_Change = (End_Value - Start_Value)
+   Percent_Change = ((End_Value / Start_Value) - 1)
+   
+    End If
+   
+   'Insert Calculation in location
+      Cells(i, 12).Value = Yearly_Change
+      Cells(i, 13).Value = Percent_Change
+   
+   Next
+         
+      
+End Sub
+
